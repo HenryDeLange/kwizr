@@ -10,7 +10,7 @@ import { red } from '@mui/material/colors';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { QuestionType } from '../data/questions';
 
 interface ExpandMoreProps extends IconButtonProps {
@@ -36,20 +36,24 @@ export default function QuizCard({ question }: CardType) {
     const [expanded, setExpanded] = useState(false);
     const [choice, setChoice] = useState(-1);
 
+    useEffect(() => {
+        setExpanded(false);
+        setChoice(-1);
+    }, [ question, setExpanded, setChoice ]);
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card>
             <CardHeader
                 avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                    <Avatar sx={{ bgcolor: red[500] }}>
                         Q
                     </Avatar>
                 }
                 title={question.title}
-                subheader='sub-title'
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
