@@ -1,7 +1,12 @@
 {
   "name": "kwizr",
-  "version": "0.1.0",
+  "description": "Best quiz game!!",
+  "author": "MyWild <henry@mywild.co.za> (http://www.mywild.co.za)",
+  "email": "henry@mywild.co.za",
+  "license": "MIT",
+  "version": "0.1.1",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
