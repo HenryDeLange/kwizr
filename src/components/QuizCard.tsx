@@ -12,6 +12,7 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import { QuestionType } from '../data/questions';
+import { shuffleQArrayInPlace } from '../utils/Utils';
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -36,15 +37,19 @@ type CardType = {
 export default function QuizCard({ question, questionIndex }: CardType) {
     const [expanded, setExpanded] = useState(false);
     const [choice, setChoice] = useState(-1);
+    const [options, setOptions] = useState(() => {
+        const copy = [...question.options];
+        shuffleQArrayInPlace(copy);
+        return copy;
+    });
 
     useEffect(() => {
         setExpanded(false);
         setChoice(-1);
+        const copy = [...question.options];
+        shuffleQArrayInPlace(copy);
+        setOptions(copy);
     }, [question, setExpanded, setChoice]);
-
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
-    };
 
     return (
         <Card>
@@ -59,7 +64,7 @@ export default function QuizCard({ question, questionIndex }: CardType) {
             />
             <CardActions disableSpacing>
                 <Stack spacing={2} style={{ width: '100%' }}>
-                    {question.options.map((option, index) => (
+                    {options.map((option, index) => (
                         <Button
                             key={index}
                             style={{ color: '#1b3144' }}
@@ -72,7 +77,7 @@ export default function QuizCard({ question, questionIndex }: CardType) {
             </CardActions>
             <ExpandMore
                 expand={expanded}
-                onClick={handleExpandClick}
+                onClick={() => setExpanded(!expanded)}
                 aria-expanded={expanded}
             >
                 <ExpandMoreIcon />

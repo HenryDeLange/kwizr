@@ -2,27 +2,20 @@ import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import { useState } from 'react';
-import { questions, QuestionType } from '../data/questions';
+import { questions } from '../data/questions';
+import { shuffleQArrayInPlace } from '../utils/Utils';
 import QuizCard from './QuizCard';
 import './QuizView.css';
-
-function shuffleQuestionsInPlace(array: QuestionType[]) {
-    console.debug('shuffle');
-    for (let index = array.length - 1; index > 0; index--) {
-        const randomIndex = Math.floor(Math.random() * (index + 1));
-        [array[index], array[randomIndex]] = [array[randomIndex], array[index]];
-    }
-}
 
 export default function QuizView() {
     const [remainingQuestions, setRemainingQuestions] = useState(() => {
         const copy = [...questions];
-        shuffleQuestionsInPlace(copy);
+        shuffleQArrayInPlace(copy);
         return copy;
     });
     if (remainingQuestions.length <= 0) {
         return (
-            <div>no more questions 😢</div>
+            <div>No more questions! 😢</div>
         );
     }
     const currentQuestion = remainingQuestions[0];
