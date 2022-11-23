@@ -40,7 +40,7 @@ export default function QuizCard({ question, questionIndex }: CardType) {
     useEffect(() => {
         setExpanded(false);
         setChoice(-1);
-    }, [ question, setExpanded, setChoice ]);
+    }, [question, setExpanded, setChoice]);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -55,34 +55,30 @@ export default function QuizCard({ question, questionIndex }: CardType) {
                     </Avatar>
                 }
                 title={question.text}
-                titleTypographyProps={{fontWeight: 'bold', fontSize: 'calc(13px + 2vmin)'}}
+                titleTypographyProps={{ fontWeight: 'bold', fontSize: 'calc(13px + 2vmin)' }}
             />
-            <CardContent>
-                
-            </CardContent>
             <CardActions disableSpacing>
-                <Stack direction="row" spacing={2}>
+                <Stack spacing={2} style={{ width: '100%' }}>
                     {question.options.map((option, index) => (
                         <Button
                             key={index}
+                            style={{ color: '#1b3144' }}
                             onClick={() => setChoice(question.options.indexOf(option))}
                         >
                             {option}
                         </Button>
                     ))}
                 </Stack>
-                <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                >
-                    <ExpandMoreIcon />
-                </ExpandMore>
             </CardActions>
+            <ExpandMore
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+            >
+                <ExpandMoreIcon />
+            </ExpandMore>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
-                    <Typography paragraph>Hint:</Typography>
                     <Typography paragraph>
                         {question.hint}
                     </Typography>
