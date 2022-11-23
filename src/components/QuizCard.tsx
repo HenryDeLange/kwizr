@@ -30,9 +30,10 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 type CardType = {
     question: QuestionType;
+    questionIndex: number;
 }
 
-export default function QuizCard({ question }: CardType) {
+export default function QuizCard({ question, questionIndex }: CardType) {
     const [expanded, setExpanded] = useState(false);
     const [choice, setChoice] = useState(-1);
 
@@ -50,15 +51,14 @@ export default function QuizCard({ question }: CardType) {
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }}>
-                        Q
+                        {questionIndex + 1}
                     </Avatar>
                 }
-                title={question.title}
+                title={question.text}
+                titleTypographyProps={{fontWeight: 'bold', fontSize: 'calc(13px + 2vmin)'}}
             />
             <CardContent>
-                <Typography variant="body2" color="text.secondary">
-                    {question.text}
-                </Typography>
+                
             </CardContent>
             <CardActions disableSpacing>
                 <Stack direction="row" spacing={2}>
