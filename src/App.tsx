@@ -7,9 +7,7 @@ function App() {
         <div className='App'>
             <header className='App-header'>
                 <img src={logo} className='App-logo' alt='logo' />
-                <div>
-                    KWIZR
-                </div>
+                KWIZR
             </header>
             <div className='App-body'>
                 <QuizView />
